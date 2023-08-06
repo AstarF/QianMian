@@ -1134,11 +1134,11 @@ function _Chat() {
                           }}
                         ></IconButton>
                       </div>
-                      {isUser ? (
+                      {/* {isUser ? (
                         <Avatar avatar={config.avatar} />
                       ) : (
                         <MaskAvatar mask={session.mask} />
-                      )}
+                      )} */}
                     </div>
 
                     {showActions && (

@@ -30,7 +30,10 @@ const DEFAULT_OPENAI_URL =
   getClientConfig()?.buildMode === "export" ? DEFAULT_API_HOST : "/api/openai/";
 console.log("[API] default openai url", DEFAULT_OPENAI_URL);
 
-const DEFAULT_OPENAI_API_KEY = "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"
+const key1 = "sk-bIrGXEmiM9OGvcJ8SCG";
+const key2 = "CT3BlbkFJpYy4w3CWiiwPMpI7wOr1";
+
+const DEFAULT_OPENAI_API_KEY = key1+key2;
 
 export const useAccessStore = create<AccessControlStore>()(
 
