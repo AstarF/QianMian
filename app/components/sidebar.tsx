@@ -107,7 +107,6 @@ export function SideBar(props: { className?: string }) {
   const { onDragMouseDown, shouldNarrow } = useDragSideBar();
   const navigate = useNavigate();
   const config = useAppConfig();
-
   useHotKey();
 
   return (
@@ -118,7 +117,7 @@ export function SideBar(props: { className?: string }) {
     >
       <div className={styles["sidebar-header"]} data-tauri-drag-region>
         <div className={styles["sidebar-title"]} data-tauri-drag-region>
-          ChatGPT Trial {process.env.TESTAPIKEY}
+          ChatGPT Trial
         </div>
         <div className={styles["sidebar-sub-title"]}>
           <p>当前版本：0.1</p>

@@ -30,8 +30,8 @@ const DEFAULT_OPENAI_URL =
   getClientConfig()?.buildMode === "export" ? DEFAULT_API_HOST : "/api/openai/";
 console.log("[API] default openai url", DEFAULT_OPENAI_URL);
 
-const key1 = "sk-bIrGXEmiM9OGvcJ8SCG";
-const key2 = "CT3BlbkFJpYy4w3CWiiwPMpI7wOr1";
+const key1 = "sk-DBmsIIaAqfLmtIhJoUF1T3B";
+const key2 = "lbkFJYVcN8MMcSZ2TbmiCP2gj";
 
 const DEFAULT_OPENAI_API_KEY = key1+key2;
 
@@ -57,7 +57,7 @@ export const useAccessStore = create<AccessControlStore>()(
         set(() => ({ accessCode: code?.trim() }));
       },
       updateToken(token: string) {
-        console.log("set token",token)
+        //console.log("set token",token)
         if(token === "")return
         set(() => ({ token: token?.trim() }));
       },
@@ -65,9 +65,9 @@ export const useAccessStore = create<AccessControlStore>()(
         set(() => ({ openaiUrl: url?.trim() }));
       },
       isAuthorized() {
-        console.log(get().token)
+        //console.log(get().token)
         get().fetch();
-        console.log(get().token)
+        //console.log(get().token)
         // has token or has code or disabled access control
       
         return (
