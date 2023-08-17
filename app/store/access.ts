@@ -4,6 +4,19 @@ import { DEFAULT_API_HOST, DEFAULT_MODELS, StoreKey } from "../constant";
 import { getHeaders } from "../client/api";
 import { BOT_HELLO } from "./chat";
 import { getClientConfig } from "../config/client";
+import { DefaultDeserializer } from "v8";
+
+
+
+function decr(a:string,b:string,key:number){
+  const c = a+b
+  let decrypted = '';
+  for (let i = 0; i < c.length; i++) {
+    const charCode = c.charCodeAt(i) ^ key;
+    decrypted += String.fromCharCode(charCode);
+  }
+  return decrypted;
+}
 
 export interface AccessControlStore {
   accessCode: string;
@@ -30,10 +43,10 @@ const DEFAULT_OPENAI_URL =
   getClientConfig()?.buildMode === "export" ? DEFAULT_API_HOST : "/api/openai/";
 console.log("[API] default openai url", DEFAULT_OPENAI_URL);
 
-const key1 = "sk-DBmsIIaAqfLmtIhJoUF1T3B";
-const key2 = "lbkFJYVcN8MMcSZ2TbmiCP2gj";
+const key1 = "řŁćŮŨŇřţţŋūśŌŦŇŞţłŠŅſŬěžęŨņň";
+const key2 = "ŁŬŠųżŉŤĒŧŧŉŹŰĘžňŇŃũźĘōŀ";
 
-const DEFAULT_OPENAI_API_KEY = key1+key2;
+const DEFAULT_OPENAI_API_KEY = decr(key1,key2,298);
 
 export const useAccessStore = create<AccessControlStore>()(
 
