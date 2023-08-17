@@ -118,11 +118,10 @@ export function SideBar(props: { className?: string }) {
     >
       <div className={styles["sidebar-header"]} data-tauri-drag-region>
         <div className={styles["sidebar-title"]} data-tauri-drag-region>
-          ChatGPT Before Rebuild
+          ChatGPT Trial {process.env.TESTAPIKEY}
         </div>
         <div className={styles["sidebar-sub-title"]}>
-          <p>当前版本：-0.1</p>
-          <p>基于Yidadaa/ChatGPT-Next-Web.git进行开发，尚未完全理解部分代码含义，时间允许可以重构项目</p>
+          <p>当前版本：0.1</p>
         </div>
       </div>
 
