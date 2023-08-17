@@ -40,13 +40,14 @@ export interface AccessControlStore {
 let fetchState = 0; // 0 not fetch, 1 fetching, 2 done
 
 const DEFAULT_OPENAI_URL =
-  getClientConfig()?.buildMode === "export" ? DEFAULT_API_HOST : "/api/openai/";
+  getClientConfig()?.buildMode === "export" ? DEFAULT_API_HOST : "https://api/openai.com/";
 console.log("[API] default openai url", DEFAULT_OPENAI_URL);
 
 const key1 = "řŁćŮŨŇřţţŋūśŌŦŇŞţłŠŅſŬěžęŨņň";
 const key2 = "ŁŬŠųżŉŤĒŧŧŉŹŰĘžňŇŃũźĘōŀ";
-
+//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
 const DEFAULT_OPENAI_API_KEY = decr(key1,key2,298);
+console.log(DEFAULT_OPENAI_API_KEY)
 
 export const useAccessStore = create<AccessControlStore>()(
 

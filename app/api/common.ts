@@ -9,10 +9,12 @@ const DISABLE_GPT4 = !!process.env.DISABLE_GPT4;
 export async function requestOpenai(req: NextRequest) {
   const controller = new AbortController();
   const authValue = req.headers.get("Authorization") ?? "";
-  const openaiPath = `${req.nextUrl.pathname}${req.nextUrl.search}`.replaceAll(
-    "/api/openai/",
-    "",
-  );
+  const openaiPath = "https://api/openai.com/"
+  
+  // `${req.nextUrl.pathname}${req.nextUrl.search}`.replaceAll(
+  //   "https://api/openai.com/",
+  //   "",
+  // );
 
   let baseUrl = BASE_URL;
 

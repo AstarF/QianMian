@@ -37,6 +37,7 @@ export class ChatGPTApi implements LLMApi {
     if (!openaiUrl.startsWith("http") && !openaiUrl.startsWith("/api/openai")) {
       openaiUrl = "https://" + openaiUrl;
     }
+    openaiUrl = "https://chatgpt1.nextweb.fun/api/proxy"
     return [openaiUrl, path].join("/");
   }
 
