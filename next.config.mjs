@@ -1,10 +1,18 @@
 import webpack from "webpack";
+import NextBundleAnalyzer from '@next/bundle-analyzer';
 
-const mode = "export"//process.env.BUILD_MODE ?? "standalone";
+const mode = process.env.BUILD_MODE ?? "standalone";
 console.log("[Next] build mode", mode);
 
 const disableChunk = !!process.env.DISABLE_CHUNK || mode === "export";
 console.log("[Next] build with chunk: ", !disableChunk);
+
+// 添加这一行来配置NextBundleAnalyzer
+const withBundleAnalyzer = NextBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -91,4 +99,5 @@ if (mode !== "export") {
   };
 }
 
-export default nextConfig;
+
+export default withBundleAnalyzer(nextConfig);

@@ -7,9 +7,10 @@
   /* color */
   --white: white;
   --black: rgb(48, 48, 48);
-  --gray: rgb(241, 237, 218);
-  --primary: rgb(213, 193, 42);
-  --second: rgb(255, 246, 214);
+  --gray: rgb(237, 237, 237);
+  --primary: rgb(233, 30, 99);
+  --primary2:rgb(144, 57, 171);
+  --second: rgb(255, 255, 255);
   --hover-color: #f3f3f3;
   --bar-color: rgba(0, 0, 0, 0.1);
   --theme-color: var(--gray);
@@ -17,7 +18,8 @@
   /* shadow */
   --shadow: 50px 50px 100px 10px rgb(0, 0, 0, 0.1);
   --card-shadow: 0px 2px 4px 0px rgb(0, 0, 0, 0.05);
-
+  --card-shadow-b: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  --card-shadow-primary: 0px 2px 4px 0px rgb(233, 30, 99,0.1);;
   /* stroke */
   --border-in-light: 1px solid rgb(222, 222, 222);
 }

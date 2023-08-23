@@ -483,7 +483,7 @@
   resize: none;
   outline: none;
   box-sizing: border-box;
-  min-height: 68px;
+  min-height: 128px;
 }
 
 .chat-input:focus {
@@ -493,7 +493,6 @@
 .chat-input-send {
   background-color: var(--primary);
   color: white;
-
   position: absolute;
   right: 30px;
   bottom: 32px;

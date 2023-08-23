@@ -1,5 +1,5 @@
 import DeleteIcon from "../icons/delete.svg";
-import BotIcon from "../icons/bot.svg";
+//import BotIcon from "../icons/bot.svg";
 
 import styles from "./home.module.scss";
 import {
@@ -57,16 +57,17 @@ export function ChatItem(props: {
             props.count,
           )}`}
         >
-          {props.narrow ? (
-            <div className={styles["chat-item-narrow"]}>
-              <div className={styles["chat-item-avatar"] + " no-dark"}>
-                <MaskAvatar mask={props.mask} />
-              </div>
-              <div className={styles["chat-item-narrow-count"]}>
-                {props.count}
-              </div>
-            </div>
-          ) : (
+          {
+          // props.narrow ? (
+          //   <div className={styles["chat-item-narrow"]}>
+          //     <div className={styles["chat-item-avatar"] + " no-dark"}>
+          //       <MaskAvatar mask={props.mask} />
+          //     </div>
+          //     <div className={styles["chat-item-narrow-count"]}>
+          //       {props.count}
+          //     </div>
+          //   </div>
+          // ) : (
             <>
               <div className={styles["chat-item-title"]}>{props.title}</div>
               <div className={styles["chat-item-info"]}>
@@ -76,7 +77,8 @@ export function ChatItem(props: {
                 <div className={styles["chat-item-date"]}>{props.time}</div>
               </div>
             </>
-          )}
+          //)
+          }
 
           <div
             className={styles["chat-item-delete"]}

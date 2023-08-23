@@ -4,36 +4,37 @@ import React, {
   useRef,
   useEffect,
   useMemo,
-  useCallback,
+  //useCallback,
   Fragment,
 } from "react";
 
 import SendWhiteIcon from "../icons/send-white.svg";
-import BrainIcon from "../icons/brain.svg";
-import RenameIcon from "../icons/rename.svg";
-import ExportIcon from "../icons/share.svg";
+// import BrainIcon from "../icons/brain.svg";
+// import RenameIcon from "../icons/rename.svg";
+// import ExportIcon from "../icons/share.svg";
 import ReturnIcon from "../icons/return.svg";
 import CopyIcon from "../icons/copy.svg";
 import LoadingIcon from "../icons/three-dots.svg";
-import PromptIcon from "../icons/prompt.svg";
-import MaskIcon from "../icons/mask.svg";
-import MaxIcon from "../icons/max.svg";
-import MinIcon from "../icons/min.svg";
+// import PromptIcon from "../icons/prompt.svg";
+// import MaskIcon from "../icons/mask.svg";
+// import MaxIcon from "../icons/max.svg";
+// import MinIcon from "../icons/min.svg";
 import ResetIcon from "../icons/reload.svg";
-import BreakIcon from "../icons/break.svg";
-import SettingsIcon from "../icons/chat-settings.svg";
+// import BreakIcon from "../icons/break.svg";
+// import SettingsIcon from "../icons/chat-settings.svg";
 import DeleteIcon from "../icons/clear.svg";
 import PinIcon from "../icons/pin.svg";
-import EditIcon from "../icons/rename.svg";
+// import EditIcon from "../icons/rename.svg";
 import ConfirmIcon from "../icons/confirm.svg";
 import CancelIcon from "../icons/cancel.svg";
 
-import LightIcon from "../icons/light.svg";
-import DarkIcon from "../icons/dark.svg";
-import AutoIcon from "../icons/auto.svg";
-import BottomIcon from "../icons/bottom.svg";
+// import LightIcon from "../icons/light.svg";
+// import DarkIcon from "../icons/dark.svg";
+// import AutoIcon from "../icons/auto.svg";
+// import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
-import RobotIcon from "../icons/robot.svg";
+//import RobotIcon from "../icons/robot.svg";
+import { Select } from "./ui-lib";
 
 import {
   ChatMessage,
@@ -42,10 +43,11 @@ import {
   BOT_HELLO,
   createMessage,
   useAccessStore,
-  Theme,
+  //Theme,
   useAppConfig,
+  ModalConfigValidator,
   DEFAULT_TOPIC,
-  ModelType,
+  //ModelType,
 } from "../store";
 
 import {
@@ -68,9 +70,9 @@ import {
   List,
   ListItem,
   Modal,
-  Selector,
+  //Selector,
   showConfirm,
-  showPrompt,
+  //showPrompt,
   showToast,
 } from "./ui-lib";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -81,9 +83,9 @@ import {
   Path,
   REQUEST_TIMEOUT_MS,
 } from "../constant";
-import { Avatar } from "./emoji";
+//import { Avatar } from "./emoji";
 import { ContextPrompts, MaskAvatar, MaskConfig } from "./mask";
-import { useMaskStore } from "../store/mask";
+//import { useMaskStore } from "../store/mask";
 import { ChatCommandPrefix, useChatCommand, useCommand } from "../command";
 import { prettyObject } from "../utils/format";
 import { ExportMessageModal } from "./exporter";
@@ -93,99 +95,101 @@ const Markdown = dynamic(async () => (await import("./markdown")).Markdown, {
   loading: () => <LoadingIcon />,
 });
 
-export function SessionConfigModel(props: { onClose: () => void }) {
-  const chatStore = useChatStore();
-  const session = chatStore.currentSession();
-  const maskStore = useMaskStore();
-  const navigate = useNavigate();
+// export function SessionConfigModel(props: { onClose: () => void }) {
+//   const chatStore = useChatStore();
+//   const session = chatStore.currentSession();
+//   const maskStore = useMaskStore();
+//   const navigate = useNavigate();
 
-  return (
-    <div className="modal-mask">
-      <Modal
-        title={Locale.Context.Edit}
-        onClose={() => props.onClose()}
-        actions={[
-          <IconButton
-            key="reset"
-            icon={<ResetIcon />}
-            bordered
-            text={Locale.Chat.Config.Reset}
-            onClick={async () => {
-              if (await showConfirm(Locale.Memory.ResetConfirm)) {
-                chatStore.updateCurrentSession(
-                  (session) => (session.memoryPrompt = ""),
-                );
-              }
-            }}
-          />,
-          <IconButton
-            key="copy"
-            icon={<CopyIcon />}
-            bordered
-            text={Locale.Chat.Config.SaveAs}
-            onClick={() => {
-              navigate(Path.Masks);
-              setTimeout(() => {
-                maskStore.create(session.mask);
-              }, 500);
-            }}
-          />,
-        ]}
-      >
-        <MaskConfig
-          mask={session.mask}
-          updateMask={(updater) => {
-            const mask = { ...session.mask };
-            updater(mask);
-            chatStore.updateCurrentSession((session) => (session.mask = mask));
-          }}
-          shouldSyncFromGlobal
-          extraListItems={
-            session.mask.modelConfig.sendMemory ? (
-              <ListItem
-                title={`${Locale.Memory.Title} (${session.lastSummarizeIndex} of ${session.messages.length})`}
-                subTitle={session.memoryPrompt || Locale.Memory.EmptyContent}
-              ></ListItem>
-            ) : (
-              <></>
-            )
-          }
-        ></MaskConfig>
-      </Modal>
-    </div>
-  );
-}
+//   return (
+//     <div className="modal-mask">
+//       <Modal
+//         title={Locale.Context.Edit}
+//         onClose={() => props.onClose()}
+//         actions={[
+//           <IconButton
+//             key="reset"
+//             icon={<ResetIcon />}
+//             bordered
+//             text={Locale.Chat.Config.Reset}
+//             onClick={async () => {
+//               if (await showConfirm(Locale.Memory.ResetConfirm)) {
+//                 chatStore.updateCurrentSession(
+//                   (session) => (session.memoryPrompt = ""),
+//                 );
+//               }
+//             }}
+//           />,
+//           <IconButton
+//             key="copy"
+//             icon={<CopyIcon />}
+//             bordered
+//             text={Locale.Chat.Config.SaveAs}
+//             onClick={() => {
+//               navigate(Path.Masks);
+//               setTimeout(() => {
+//                 maskStore.create(session.mask);
+//               }, 500);
+//             }}
+//           />,
+//         ]}
+//       >
+//         <MaskConfig
+//           mask={session.mask}
+//           updateMask={(updater) => {
+//             const mask = { ...session.mask };
+//             updater(mask);
+//             chatStore.updateCurrentSession((session) => (session.mask = mask));
+//           }}
+//           shouldSyncFromGlobal
+//           extraListItems={
+//             session.mask.modelConfig.sendMemory ? (
+//               <ListItem
+//                 title={`${Locale.Memory.Title} (${session.lastSummarizeIndex} of ${session.messages.length})`}
+//                 subTitle={session.memoryPrompt || Locale.Memory.EmptyContent}
+//               ></ListItem>
+//             ) : (
+//               <></>
+//             )
+//           }
+//         ></MaskConfig>
+//       </Modal>
+//     </div>
+//   );
+// }
 
-function PromptToast(props: {
-  showToast?: boolean;
-  showModal?: boolean;
-  setShowModal: (_: boolean) => void;
-}) {
-  const chatStore = useChatStore();
-  const session = chatStore.currentSession();
-  const context = session.mask.context;
 
-  return (
-    <div className={styles["prompt-toast"]} key="prompt-toast">
-      {props.showToast && (
-        <div
-          className={styles["prompt-toast-inner"] + " clickable"}
-          role="button"
-          onClick={() => props.setShowModal(true)}
-        >
-          <BrainIcon />
-          <span className={styles["prompt-toast-content"]}>
-            {Locale.Context.Toast(context.length)}
-          </span>
-        </div>
-      )}
-      {props.showModal && (
-        <SessionConfigModel onClose={() => props.setShowModal(false)} />
-      )}
-    </div>
-  );
-}
+// function PromptToast(props: {
+//   showToast?: boolean;
+//   showModal?: boolean;
+//   setShowModal: (_: boolean) => void;
+// }) {
+//   const chatStore = useChatStore();
+//   const session = chatStore.currentSession();
+//   const context = session.mask.context;
 
+//   return (
+//     <div className={styles["prompt-toast"]} key="prompt-toast">
+//       {props.showToast && (
+//         <div
+//           className={styles["prompt-toast-inner"] + " clickable"}
+//           role="button"
+//           onClick={() => props.setShowModal(true)}
+//         >
+//           <BrainIcon />
+//           <span className={styles["prompt-toast-content"]}>
+//             {Locale.Context.Toast(context.length)}
+//           </span>
+//         </div>
+//       )}
+//       {props.showModal && (
+//         <SessionConfigModel onClose={() => props.setShowModal(false)} />
+//       )}
+//     </div>
+//   );
+// }
+
+//判断提交状态，是否进行了提交，捕获提交热键，eg：Ctrl+Enter
 function useSubmitHandler() {
   const config = useAppConfig();
   const submitKey = config.submitKey;
@@ -233,97 +237,99 @@ function useSubmitHandler() {
 
 export type RenderPompt = Pick<Prompt, "title" | "content">;
 
-export function PromptHints(props: {
-  prompts: RenderPompt[];
-  onPromptSelect: (prompt: RenderPompt) => void;
-}) {
-  const noPrompts = props.prompts.length === 0;
-  const [selectIndex, setSelectIndex] = useState(0);
-  const selectedRef = useRef<HTMLDivElement>(null);
+// export function PromptHints(props: {
+//   prompts: RenderPompt[];
+//   onPromptSelect: (prompt: RenderPompt) => void;
+// }) {
+//   const noPrompts = props.prompts.length === 0;
+//   const [selectIndex, setSelectIndex] = useState(0);
+//   const selectedRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setSelectIndex(0);
-  }, [props.prompts.length]);
+//   useEffect(() => {
+//     setSelectIndex(0);
+//   }, [props.prompts.length]);
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (noPrompts || e.metaKey || e.altKey || e.ctrlKey) {
-        return;
-      }
-      // arrow up / down to select prompt
-      const changeIndex = (delta: number) => {
-        e.stopPropagation();
-        e.preventDefault();
-        const nextIndex = Math.max(
-          0,
-          Math.min(props.prompts.length - 1, selectIndex + delta),
-        );
-        setSelectIndex(nextIndex);
-        selectedRef.current?.scrollIntoView({
-          block: "center",
-        });
-      };
+//   useEffect(() => {
+//     const onKeyDown = (e: KeyboardEvent) => {
+//       if (noPrompts || e.metaKey || e.altKey || e.ctrlKey) {
+//         return;
+//       }
+//       // arrow up / down to select prompt
+//       const changeIndex = (delta: number) => {
+//         e.stopPropagation();
+//         e.preventDefault();
+//         const nextIndex = Math.max(
+//           0,
+//           Math.min(props.prompts.length - 1, selectIndex + delta),
+//         );
+//         setSelectIndex(nextIndex);
+//         selectedRef.current?.scrollIntoView({
+//           block: "center",
+//         });
+//       };
 
-      if (e.key === "ArrowUp") {
-        changeIndex(1);
-      } else if (e.key === "ArrowDown") {
-        changeIndex(-1);
-      } else if (e.key === "Enter") {
-        const selectedPrompt = props.prompts.at(selectIndex);
-        if (selectedPrompt) {
-          props.onPromptSelect(selectedPrompt);
-        }
-      }
-    };
+//       if (e.key === "ArrowUp") {
+//         changeIndex(1);
+//       } else if (e.key === "ArrowDown") {
+//         changeIndex(-1);
+//       } else if (e.key === "Enter") {
+//         const selectedPrompt = props.prompts.at(selectIndex);
+//         if (selectedPrompt) {
+//           props.onPromptSelect(selectedPrompt);
+//         }
+//       }
+//     };
 
-    window.addEventListener("keydown", onKeyDown);
+//     window.addEventListener("keydown", onKeyDown);
 
-    return () => window.removeEventListener("keydown", onKeyDown);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.prompts.length, selectIndex]);
+//     return () => window.removeEventListener("keydown", onKeyDown);
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, [props.prompts.length, selectIndex]);
 
-  if (noPrompts) return null;
-  return (
-    <div className={styles["prompt-hints"]}>
-      {props.prompts.map((prompt, i) => (
-        <div
-          ref={i === selectIndex ? selectedRef : null}
-          className={
-            styles["prompt-hint"] +
-            ` ${i === selectIndex ? styles["prompt-hint-selected"] : ""}`
-          }
-          key={prompt.title + i.toString()}
-          onClick={() => props.onPromptSelect(prompt)}
-          onMouseEnter={() => setSelectIndex(i)}
-        >
-          <div className={styles["hint-title"]}>{prompt.title}</div>
-          <div className={styles["hint-content"]}>{prompt.content}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
+//   if (noPrompts) return null;
+//   return (
+//     <div className={styles["prompt-hints"]}>
+//       {props.prompts.map((prompt, i) => (
+//         <div
+//           ref={i === selectIndex ? selectedRef : null}
+//           className={
+//             styles["prompt-hint"] +
+//             ` ${i === selectIndex ? styles["prompt-hint-selected"] : ""}`
+//           }
+//           key={prompt.title + i.toString()}
+//           onClick={() => props.onPromptSelect(prompt)}
+//           onMouseEnter={() => setSelectIndex(i)}
+//         >
+//           <div className={styles["hint-title"]}>{prompt.title}</div>
+//           <div className={styles["hint-content"]}>{prompt.content}</div>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
 
-function ClearContextDivider() {
-  const chatStore = useChatStore();
+//
+// function ClearContextDivider() {
+//   const chatStore = useChatStore();
 
-  return (
-    <div
-      className={styles["clear-context"]}
-      onClick={() =>
-        chatStore.updateCurrentSession(
-          (session) => (session.clearContextIndex = undefined),
-        )
-      }
-    >
-      <div className={styles["clear-context-tips"]}>{Locale.Context.Clear}</div>
-      <div className={styles["clear-context-revert-btn"]}>
-        {Locale.Context.Revert}
-      </div>
-    </div>
-  );
-}
+//   return (
+//     <div
+//       className={styles["clear-context"]}
+//       onClick={() =>
+//         chatStore.updateCurrentSession(
+//           (session) => (session.clearContextIndex = undefined),
+//         )
+//       }
+//     >
+//       <div className={styles["clear-context-tips"]}>{Locale.Context.Clear}</div>
+//       <div className={styles["clear-context-revert-btn"]}>
+//         {Locale.Context.Revert}
+//       </div>
+//     </div>
+//   );
+// }
 
+//可复用的按钮组件
 function ChatAction(props: {
   text: string;
   icon: JSX.Element;
@@ -373,6 +379,7 @@ function ChatAction(props: {
   );
 }
 
+//gpt输出时自动向下滚动
 function useScrollToBottom() {
   // for auto-scroll
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -403,139 +410,140 @@ function useScrollToBottom() {
   };
 }
 
-export function ChatActions(props: {
-  showPromptModal: () => void;
-  scrollToBottom: () => void;
-  showPromptHints: () => void;
-  hitBottom: boolean;
-}) {
-  const config = useAppConfig();
-  const navigate = useNavigate();
-  const chatStore = useChatStore();
+// export function ChatActions(props: {
+//   showPromptModal: () => void;
+//   scrollToBottom: () => void;
+//   showPromptHints: () => void;
+//   hitBottom: boolean;
+// }) {
+//   const config = useAppConfig();
+//   const navigate = useNavigate();
+//   const chatStore = useChatStore();
 
-  // switch themes
-  const theme = config.theme;
-  function nextTheme() {
-    const themes = [Theme.Auto, Theme.Light, Theme.Dark];
-    const themeIndex = themes.indexOf(theme);
-    const nextIndex = (themeIndex + 1) % themes.length;
-    const nextTheme = themes[nextIndex];
-    config.update((config) => (config.theme = nextTheme));
-  }
+//   // switch themes
+//   const theme = config.theme;
+//   function nextTheme() {
+//     const themes = [Theme.Auto, Theme.Light, Theme.Dark];
+//     const themeIndex = themes.indexOf(theme);
+//     const nextIndex = (themeIndex + 1) % themes.length;
+//     const nextTheme = themes[nextIndex];
+//     config.update((config) => (config.theme = nextTheme));
+//   }
 
-  // stop all responses
-  const couldStop = ChatControllerPool.hasPending();
-  const stopAll = () => ChatControllerPool.stopAll();
+//   // stop all responses
+//   const couldStop = ChatControllerPool.hasPending();
+//   const stopAll = () => ChatControllerPool.stopAll();
 
-  // switch model
-  const currentModel = chatStore.currentSession().mask.modelConfig.model;
-  const models = useMemo(
-    () =>
-      config
-        .allModels()
-        .filter((m) => m.available)
-        .map((m) => m.name),
-    [config],
-  );
-  const [showModelSelector, setShowModelSelector] = useState(false);
+//   // switch model
+//   const currentModel = chatStore.currentSession().mask.modelConfig.model;
+//   const models = useMemo(
+//     () =>
+//       config
+//         .allModels()
+//         .filter((m) => m.available)
+//         .map((m) => m.name),
+//     [config],
+//   );
+//   const [showModelSelector, setShowModelSelector] = useState(false);
 
-  return (
-    <div className={styles["chat-input-actions"]}>
-      {couldStop && (
-        <ChatAction
-          onClick={stopAll}
-          text={Locale.Chat.InputActions.Stop}
-          icon={<StopIcon />}
-        />
-      )}
-      {!props.hitBottom && (
-        <ChatAction
-          onClick={props.scrollToBottom}
-          text={Locale.Chat.InputActions.ToBottom}
-          icon={<BottomIcon />}
-        />
-      )}
-      {props.hitBottom && (
-        <ChatAction
-          onClick={props.showPromptModal}
-          text={Locale.Chat.InputActions.Settings}
-          icon={<SettingsIcon />}
-        />
-      )}
+//   return (
+//     <div className={styles["chat-input-actions"]}>
+//       {couldStop && (
+//         <ChatAction
+//           onClick={stopAll}
+//           text={Locale.Chat.InputActions.Stop}
+//           icon={<StopIcon />}
+//         />
+//       )}
+//       {!props.hitBottom && (
+//         <ChatAction
+//           onClick={props.scrollToBottom}
+//           text={Locale.Chat.InputActions.ToBottom}
+//           icon={<BottomIcon />}
+//         />
+//       )}
+//       {props.hitBottom && (
+//         <ChatAction
+//           onClick={props.showPromptModal}
+//           text={Locale.Chat.InputActions.Settings}
+//           icon={<SettingsIcon />}
+//         />
+//       )}
 
-      <ChatAction
-        onClick={nextTheme}
-        text={Locale.Chat.InputActions.Theme[theme]}
-        icon={
-          <>
-            {theme === Theme.Auto ? (
-              <AutoIcon />
-            ) : theme === Theme.Light ? (
-              <LightIcon />
-            ) : theme === Theme.Dark ? (
-              <DarkIcon />
-            ) : null}
-          </>
-        }
-      />
+//       <ChatAction
+//         onClick={nextTheme}
+//         text={Locale.Chat.InputActions.Theme[theme]}
+//         icon={
+//           <>
+//             {theme === Theme.Auto ? (
+//               <AutoIcon />
+//             ) : theme === Theme.Light ? (
+//               <LightIcon />
+//             ) : theme === Theme.Dark ? (
+//               <DarkIcon />
+//             ) : null}
+//           </>
+//         }
+//       />
 
-      <ChatAction
-        onClick={props.showPromptHints}
-        text={Locale.Chat.InputActions.Prompt}
-        icon={<PromptIcon />}
-      />
+//       <ChatAction
+//         onClick={props.showPromptHints}
+//         text={Locale.Chat.InputActions.Prompt}
+//         icon={<PromptIcon />}
+//       />
 
-      <ChatAction
-        onClick={() => {
-          navigate(Path.Masks);
-        }}
-        text={Locale.Chat.InputActions.Masks}
-        icon={<MaskIcon />}
-      />
+//       <ChatAction
+//         onClick={() => {
+//           navigate(Path.Masks);
+//         }}
+//         text={Locale.Chat.InputActions.Masks}
+//         icon={<MaskIcon />}
+//       />
 
-      <ChatAction
-        text={Locale.Chat.InputActions.Clear}
-        icon={<BreakIcon />}
-        onClick={() => {
-          chatStore.updateCurrentSession((session) => {
-            if (session.clearContextIndex === session.messages.length) {
-              session.clearContextIndex = undefined;
-            } else {
-              session.clearContextIndex = session.messages.length;
-              session.memoryPrompt = ""; // will clear memory
-            }
-          });
-        }}
-      />
+//       <ChatAction
+//         text={Locale.Chat.InputActions.Clear}
+//         icon={<BreakIcon />}
+//         onClick={() => {
+//           chatStore.updateCurrentSession((session) => {
+//             if (session.clearContextIndex === session.messages.length) {
+//               session.clearContextIndex = undefined;
+//             } else {
+//               session.clearContextIndex = session.messages.length;
+//               session.memoryPrompt = ""; // will clear memory
+//             }
+//           });
+//         }}
+//       />
 
-      <ChatAction
-        onClick={() => setShowModelSelector(true)}
-        text={currentModel}
-        icon={<RobotIcon />}
-      />
+//       <ChatAction
+//         onClick={() => setShowModelSelector(true)}
+//         text={currentModel}
+//         icon={<RobotIcon />}
+//       />
 
-      {showModelSelector && (
-        <Selector
-          defaultSelectedValue={currentModel}
-          items={models.map((m) => ({
-            title: m,
-            value: m,
-          }))}
-          onClose={() => setShowModelSelector(false)}
-          onSelection={(s) => {
-            if (s.length === 0) return;
-            chatStore.updateCurrentSession((session) => {
-              session.mask.modelConfig.model = s[0] as ModelType;
-              session.mask.syncGlobalConfig = false;
-            });
-            showToast(s[0]);
-          }}
-        />
-      )}
-    </div>
-  );
-}
+//       {showModelSelector && (
+//         <Selector
+//           defaultSelectedValue={currentModel}
+//           items={models.map((m) => ({
+//             title: m,
+//             value: m,
+//           }))}
+//           onClose={() => setShowModelSelector(false)}
+//           onSelection={(s) => {
+//             if (s.length === 0) return;
+//             chatStore.updateCurrentSession((session) => {
+//               session.mask.modelConfig.model = s[0] as ModelType;
+//               session.mask.syncGlobalConfig = false;
+//             });
+//             showToast(s[0]);
+//           }}
+//         />
+//       )}
+//     </div>
+//   );
+// }
 
+//编辑聊天信息
 export function EditMessageModal(props: { onClose: () => void }) {
   const chatStore = useChatStore();
   const session = chatStore.currentSession();
@@ -598,6 +606,7 @@ export function EditMessageModal(props: { onClose: () => void }) {
   );
 }
 
+//页面主逻辑
 function _Chat() {
   type RenderMessage = ChatMessage & { preview?: boolean };
 
@@ -617,7 +626,7 @@ function _Chat() {
   const isMobileScreen = useMobileScreen();
   const navigate = useNavigate();
 
-  // prompt hints
+  // prompt hints 根据用户输入，搜索数据库中的提示词 需要以/开头进行输入
   const promptStore = usePromptStore();
   const [promptHints, setPromptHints] = useState<RenderPompt[]>([]);
   const onSearch = useDebouncedCallback(
@@ -629,7 +638,7 @@ function _Chat() {
     { leading: true, trailing: true },
   );
 
-  // auto grow input
+  // auto grow input 输入时计算当前行数
   const [inputRows, setInputRows] = useState(2);
   const measure = useDebouncedCallback(
     () => {
@@ -663,12 +672,13 @@ function _Chat() {
     del: () => chatStore.deleteSession(chatStore.currentSessionIndex),
   });
 
-  // only search prompts when user input is short
+  // only search prompts when user input is short  
   const SEARCH_TEXT_LIMIT = 30;
+
+  //用户在textarea输入时触发
   const onInput = (text: string) => {
     setUserInput(text);
     const n = text.trim().length;
-
     // clear search results
     if (n === 0) {
       setPromptHints([]);
@@ -683,8 +693,10 @@ function _Chat() {
     }
   };
 
+  //提交时触发
   const doSubmit = (userInput: string) => {
     if (userInput.trim() === "") return;
+    //匹配命令
     const matchCommand = chatCommands.match(userInput);
     if (matchCommand.matched) {
       setUserInput("");
@@ -693,7 +705,7 @@ function _Chat() {
       return;
     }
     setIsLoading(true);
-    chatStore.onUserInput(userInput).then(() => setIsLoading(false));
+    chatStore.onUserInput(userInput).then(() => setIsLoading(false));//*
     localStorage.setItem(LAST_INPUT_KEY, userInput);
     setUserInput("");
     setPromptHints([]);
@@ -701,6 +713,7 @@ function _Chat() {
     setAutoScroll(true);
   };
 
+  //选择预设的Prompt
   const onPromptSelect = (prompt: RenderPompt) => {
     setTimeout(() => {
       setPromptHints([]);
@@ -718,11 +731,12 @@ function _Chat() {
     }, 30);
   };
 
-  // stop response
+  // stop response 停止响应
   const onUserStop = (messageId: string) => {
     ChatControllerPool.stop(session.id, messageId);
   };
 
+  //每次打开对话运行，初始化页面配置，检查聊天记录
   useEffect(() => {
     chatStore.updateCurrentSession((session) => {
       const stopTiming = Date.now() - REQUEST_TIMEOUT_MS;
@@ -752,7 +766,7 @@ function _Chat() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // check if should send message
+  // check if should send message 监听键盘按键事件
   const onInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     // if ArrowUp and no userInput, fill with last input
     if (
@@ -769,6 +783,8 @@ function _Chat() {
       e.preventDefault();
     }
   };
+
+  //右键点击对话框直接复制内容
   const onRightClick = (e: any, message: ChatMessage) => {
     // copy to clipboard
     if (selectOrCopy(e.currentTarget, message.content)) {
@@ -780,6 +796,7 @@ function _Chat() {
     }
   };
 
+  //删除对话内容
   const deleteMessage = (msgId?: string) => {
     chatStore.updateCurrentSession(
       (session) =>
@@ -791,6 +808,8 @@ function _Chat() {
     deleteMessage(msgId);
   };
 
+
+  //重新发送信息 - 通过对话框的重发按钮
   const onResend = (message: ChatMessage) => {
     // when it is resending a message
     // 1. for a user's message, find the next bot response
@@ -841,10 +860,11 @@ function _Chat() {
 
     // resend the message
     setIsLoading(true);
-    chatStore.onUserInput(userMessage.content).then(() => setIsLoading(false));
+    chatStore.onUserInput(userMessage.content).then(() => setIsLoading(false));//*
     inputRef.current?.focus();
   };
 
+  //添加预设提示词语
   const onPinMessage = (message: ChatMessage) => {
     chatStore.updateCurrentSession((session) =>
       session.mask.context.push(message),
@@ -858,10 +878,14 @@ function _Chat() {
     });
   };
 
+  //
   const context: RenderMessage[] = useMemo(() => {
     return session.mask.hideContext ? [] : session.mask.context.slice();
   }, [session.mask.context, session.mask.hideContext]);
+
   const accessStore = useAccessStore();
+
+  //第一句话
   if (
     context.length === 0 &&
     session.messages.at(0)?.content !== BOT_HELLO.content
@@ -872,38 +896,41 @@ function _Chat() {
     }
     context.push(copiedHello);
   }
-  // preview messages
+
+  // preview messages  一句一句渲染对话框中的话
   const renderMessages = useMemo(() => {
     //console.log("rendering")
     // 渲染信息
-    return context
+    const result = context
       .concat(session.messages as RenderMessage[])
       .concat(
         isLoading
           ? [
-              {
-                ...createMessage({
-                  role: "assistant",
-                  content: "……",
-                }),
-                preview: true,
-              },
-            ]
+            {
+              ...createMessage({
+                role: "assistant",
+                content: "……",
+              }),
+              preview: true,
+            },
+          ]
           : [],
       )
       .concat(
         userInput.length > 0 && config.sendPreviewBubble
           ? [
-              {
-                ...createMessage({
-                  role: "user",
-                  content: userInput,
-                }),
-                preview: true,
-              },
-            ]
+            {
+              ...createMessage({
+                role: "user",
+                content: userInput,
+              }),
+              preview: true,
+            },
+          ]
           : [],
       );
+    console.log(result)
+    return result
   }, [
     config.sendPreviewBubble,
     context,
@@ -968,6 +995,7 @@ function _Chat() {
   const autoFocus = !isMobileScreen; // wont auto focus on mobile screen
   const showMaxIcon = !isMobileScreen && !clientConfig?.isApp;
 
+  //使用命令
   useCommand({
     fill: setUserInput,
     submit: (text) => {
@@ -993,7 +1021,7 @@ function _Chat() {
         if (payload.key || payload.url) {
           showConfirm(
             Locale.URLCommand.Settings +
-              `\n${JSON.stringify(payload, null, 4)}`,
+            `\n${JSON.stringify(payload, null, 4)}`,
           ).then((res) => {
             if (!res) return;
             if (payload.key) {
@@ -1040,7 +1068,33 @@ function _Chat() {
             {Locale.Chat.SubTitle(session.messages.length)}
           </div>
         </div>
-        <div className="window-actions">
+        <div>
+          <Select
+            value={config.modelConfig.model}
+            onChange={(e) => {
+              config.update(
+                (config) => (config.modelConfig.model = ModalConfigValidator.model(
+                  e.currentTarget.value,
+                )),
+              )
+              console.log(e.currentTarget.value)
+            }}
+          >
+            <option value={config.allModels()[6].name}>
+              gpt-3.5-turbo
+            </option>
+            <option value={config.allModels()[3].name}>
+              gpt-4-32k
+            </option>
+            {/* {config.allModels().map((v, i) => (
+
+              <option value={v.name} key={i} disabled={!v.available}>
+                {v.name}
+              </option>
+            ))} */}
+          </Select>
+        </div>
+        {/* <div className="window-actions">
           {!isMobileScreen && (
             <div className="window-action-button">
               <IconButton
@@ -1062,6 +1116,7 @@ function _Chat() {
           </div>
           {showMaxIcon && (
             <div className="window-action-button">
+              
               <IconButton
                 icon={config.tightBorder ? <MinIcon /> : <MaxIcon />}
                 bordered
@@ -1073,13 +1128,14 @@ function _Chat() {
               />
             </div>
           )}
-        </div>
+        </div> */}
 
-        <PromptToast
+        {/* <PromptToast
           showToast={!hitBottom}
           showModal={showPromptModal}
           setShowModal={setShowPromptModal}
-        />
+        /> */}
+
       </div>
 
       <div
@@ -1102,7 +1158,6 @@ function _Chat() {
           const showTyping = message.preview || message.streaming;
 
           const shouldShowClearContextDivider = i === clearContextIndex - 1;
-
           return (
             <Fragment key={message.id}>
               <div
@@ -1113,7 +1168,7 @@ function _Chat() {
                 <div className={styles["chat-message-container"]}>
                   <div className={styles["chat-message-header"]}>
                     {/* 头部菜单 */}
-                    <div className={styles["chat-message-avatar"]}>
+                    {/* <div className={styles["chat-message-avatar"]}>
                       <div className={styles["chat-message-edit"]}>
                         <IconButton
                           icon={<EditIcon />}
@@ -1134,12 +1189,12 @@ function _Chat() {
                           }}
                         ></IconButton>
                       </div>
-                      {/* {isUser ? (
+                       {isUser ? (
                         <Avatar avatar={config.avatar} />
                       ) : (
                         <MaskAvatar mask={session.mask} />
-                      )} */}
-                    </div>
+                      )} 
+                    </div> */}
 
                     {showActions && (
                       <div className={styles["chat-message-actions"]}>
@@ -1188,6 +1243,7 @@ function _Chat() {
                   )}
                   <div className={styles["chat-message-item"]}>
                     {/* 对话框 */}
+
                     <Markdown
                       content={message.content}
                       loading={
@@ -1207,23 +1263,23 @@ function _Chat() {
                   </div>
 
                   <div className={styles["chat-message-action-date"]}>
-                    {isContext
+                    {/* {isContext
                       ? Locale.Chat.IsContext
-                      : message.date.toLocaleString()}
+                      : message.date.toLocaleString()} */}
+                    {message.date.toLocaleString()}
                   </div>
                 </div>
               </div>
-              {shouldShowClearContextDivider && <ClearContextDivider />}
+              {/* {shouldShowClearContextDivider && <ClearContextDivider />} */}
             </Fragment>
           );
         })}
       </div>
 
       <div className={styles["chat-input-panel"]}>
-        {/* 输入面板 aaabbb*/}
-        <PromptHints prompts={promptHints} onPromptSelect={onPromptSelect} />
-
-        <ChatActions
+        {/* 输入面板 */}
+        {/* <PromptHints prompts={promptHints} onPromptSelect={onPromptSelect} /> */}
+        {/* <ChatActions
           showPromptModal={() => setShowPromptModal(true)}
           scrollToBottom={scrollToBottom}
           hitBottom={hitBottom}
@@ -1238,7 +1294,7 @@ function _Chat() {
             setUserInput("/");
             onSearch("");
           }}
-        />
+        /> */}
         <div className={styles["chat-input-panel-inner"]}>
           <textarea
             ref={inputRef}
@@ -1254,6 +1310,7 @@ function _Chat() {
             style={{
               fontSize: config.fontSize,
             }}
+
           />
           <IconButton
             icon={<SendWhiteIcon />}
@@ -1263,6 +1320,7 @@ function _Chat() {
             onClick={() => doSubmit(userInput)}
           />
         </div>
+
       </div>
 
       {showExport && (

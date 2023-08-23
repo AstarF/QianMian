@@ -1,15 +1,137 @@
+.windows {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0px;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.top_header {
+  width: 100%;
+  height: 50px;
+  color: #eee;
+  line-height: 50px;
+  text-align: left;
+  font-size: 15px;
+  border-bottom: 1px solid #eee;
+  font-family: "Yuanti SC", Georgia, Serif;
+  font-weight: bold;
+  // background-image: linear-gradient(to right,  #000000 50% 85%, rgb(0, 80, 101));
+  // background-image: linear-gradient(to right,  #fff 3% 85%, rgb(219, 239, 245));
+  background-color: #fff;
+  padding-left: 30px;
+}
+
+.buttom_footer {
+  width: 100%;
+  height: 20px;
+  color: #eee;
+  line-height: 20px;
+  text-align: center;
+  font-size: 15px;
+  border-top: 1px solid #eee;
+  font-family: "Yuanti SC", Georgia, Serif;
+  background-color: #fff;
+  background-image: linear-gradient(to right, var(--primary2) 15%, var(--primary) 90%);
+}
+
+.text-gradient {
+  background-image: linear-gradient(to right, var(--primary2), var(--primary));
+  -webkit-background-clip: text;
+  color: transparent;
+  font-family: "Yuanti SC", Georgia, Serif;
+  letter-spacing: 3px;
+
+  font-size: 18px;
+}
+
+.text-gradient-rb {
+  background-image: linear-gradient(to right bottom, var(--primary), var(--primary2));
+  -webkit-background-clip: text;
+  color: transparent;
+  font-family: "Yuanti SC", Georgia, Serif;
+}
+
+.primaiy-bar {
+  background-image: linear-gradient(to left, var(--primary2), var(--primary));
+  width: 100%;
+  height: 2px;
+}
+
+.NavSideBar {
+  width: 60px;
+  background-color: #fff;
+  // background-image: linear-gradient(to top,var(--primary2), var(--primary));
+  padding-top: 30px;
+}
+
+.NavButton {
+  width: 50px;
+  height: 50px;
+  box-shadow: var(--card-shadow-primary);
+  font-size: 25px;
+  text-align: center;
+  border-radius: 20px;
+  margin: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  line-height: 50px;
+
+  .text-gradient-nav {
+    background-image: linear-gradient(to right bottom, var(--primary), var(--primary2));
+    -webkit-background-clip: text;
+    color: transparent;
+    font-family: "Yuanti SC", Georgia, Serif;
+  }
+  
+}
+
+.NavButton:hover {
+  color: #fff;
+  background-image: linear-gradient(to right bottom, var(--primary), var(--primary2));
+  .text-gradient-nav{
+    color: #fff;
+  }
+}
+
+
+.Select {
+  color: #fff;
+  background-image: linear-gradient(to right bottom, var(--primary), var(--primary2));
+  .text-gradient-nav{
+    color: #fff;
+  }
+}
+
+.UserButton {
+  width: 50px;
+  height: 50px;
+  box-shadow: var(--card-shadow-primary);
+  font-size: 25px;
+  text-align: center;
+  border-radius: 25px;
+  margin: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 50px;
+}
+
 @mixin container {
+
   background-color: var(--white);
   border: var(--border-in-light);
   border-radius: 20px;
-  box-shadow: var(--shadow);
+  // box-shadow: var(--shadow);
   color: var(--black);
   background-color: var(--white);
   min-width: 600px;
   min-height: 480px;
   max-width: 1200px;
-
   display: flex;
+  flex: 1;
   overflow: hidden;
   box-sizing: border-box;
 
@@ -48,6 +170,18 @@
   box-shadow: inset -2px 0px 2px 0px rgb(0, 0, 0, 0.05);
   position: relative;
   transition: width ease 0.05s;
+  // background-image: linear-gradient(to bottom,  #fff 15% 85%, rgb(239, 239, 239));
+  background-color: var(--gray);
+
+  .clock {
+    text-align: center;
+    font-size: 50px;
+    line-height: 50px;
+    padding: 0;
+    margin: 0;
+
+    margin-top: 10px;
+  }
 
   .sidebar-header-bar {
     display: flex;
@@ -128,6 +262,10 @@
     left: 0;
   }
 
+  .NavSideBar {
+    display: none;
+  }
+
   .mobile {
     display: block;
   }
@@ -146,8 +284,11 @@
 }
 
 .sidebar-title {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: 3px;
+  text-align: center;
+  // font-weight: bold;
+  font-family: "Yuanti SC", Georgia, Serif;
   animation: slide-in ease 0.3s;
 }
 
@@ -182,6 +323,7 @@
 }
 
 .chat-item-selected {
+  color: var(--primary);
   border-color: var(--primary);
 }
 
@@ -205,12 +347,12 @@
   cursor: pointer;
 }
 
-.chat-item:hover > .chat-item-delete {
+.chat-item:hover>.chat-item-delete {
   opacity: 0.5;
   transform: translateX(-4px);
 }
 
-.chat-item:hover > .chat-item-delete:hover {
+.chat-item:hover>.chat-item-delete:hover {
   opacity: 1;
 }
 
@@ -231,10 +373,12 @@
 }
 
 .narrow-sidebar {
+
   .sidebar-title,
   .sidebar-sub-title {
     display: none;
   }
+
   .sidebar-logo {
     position: relative;
     display: flex;

@@ -18,6 +18,8 @@
   "dependencies": {
     "@fortaine/fetch-event-source": "^3.0.6",
     "@hello-pangea/dnd": "^16.3.0",
+    "@next/bundle-analyzer": "^13.4.16",
+    "@next/font": "^13.4.19",
     "@svgr/webpack": "^6.5.1",
     "@vercel/analytics": "^0.1.11",
     "emoji-picker-react": "^4.4.7",
