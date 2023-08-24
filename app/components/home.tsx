@@ -23,6 +23,9 @@ import {
   useLocation,
 } from "react-router-dom";
 import { SideBar } from "./sidebar";
+import { Header } from "./header";
+import { Footer } from "./footer";
+import { NavBar } from "./navbar";
 import { useAppConfig } from "../store/config";
 //import { AuthPage } from "./auth";
 import { getClientConfig } from "../config/client";
@@ -123,9 +126,7 @@ function Screen() {
     <>
 
       <div className={styles["windows"]}>
-        <div className={styles["top_header"]}>
-          <span className={styles["text-gradient"]}>千面·GPT</span></div>
-        <div className={styles["primaiy-bar"]}></div>
+        <Header></Header>
         <div
           className={
             styles.container +
@@ -144,26 +145,7 @@ function Screen() {
             // ) : (
 
             <>
-              {/* <NavBar> </NavBar> */}
-              <div className={styles["NavSideBar"]}>
-                <div className={styles["NavButton"]+" "+styles["Select"]}>
-                  <span className={styles["text-gradient-nav"]}>聊</span>
-                </div>
-                <div className={styles["NavButton"]}>
-                  <span className={styles["text-gradient-nav"]}>绘</span>
-                </div>
-                <div className={styles["NavButton"]}>
-                  <span className={styles["text-gradient-nav"]}>阅</span>
-                </div>
-                <div className={styles["NavButton"]}>
-                  <span className={styles["text-gradient-nav"]}>想</span>
-                </div>
-                {/* <div className={styles["UserButton"]}> */}
-                  {/* <Link to={Path.Settings}> */}
-                  
-                  {/* </Link> */}
-                {/* </div> */}
-              </div>
+              <NavBar></NavBar>
               <SideBar className={isHome ? styles["sidebar-show"] : ""} />
 
               <div className={styles["window-content"]} id={SlotID.AppBody}>
@@ -179,7 +161,7 @@ function Screen() {
             //)
           }
         </div>
-        <div className={styles["buttom_footer"]}>We just talk about the feature</div>
+        <Footer></Footer>
       </div>
     </>
   );
