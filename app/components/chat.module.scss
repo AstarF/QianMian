@@ -396,7 +396,6 @@
 }
 
 .chat-input-panel {
-  position: relative;
   width: 100%;
   padding: 20px;
   padding-top: 10px;
@@ -404,7 +403,7 @@
   flex-direction: column;
   border-top: var(--border-in-light);
   box-shadow: var(--card-shadow);
-
+  z-index: 999;
   .chat-input-actions {
     .chat-input-action {
       margin-bottom: 10px;
