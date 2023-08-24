@@ -1083,8 +1083,8 @@ function _Chat() {
             <option value={config.allModels()[6].name}>
               gpt-3.5-turbo
             </option>
-            <option value={config.allModels()[3].name}>
-              gpt-4-32k
+            <option value={config.allModels()[0].name}>
+              gpt-4
             </option>
             {/* {config.allModels().map((v, i) => (
 
