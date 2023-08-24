@@ -3,12 +3,18 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./home.module.scss";
 
 import { IconButton } from "./button";
+import { ButtonContainer } from "./button-container";
 import SettingsIcon from "../icons/settings.svg";
 import AddIcon from "../icons/add.svg";
 import CloseIcon from "../icons/close.svg";
 import MaskIcon from "../icons/mask.svg";
 import PluginIcon from "../icons/plugin.svg";
 //import DragIcon from "../icons/drag.svg";
+import { GoPerson } from "react-icons/go";
+import { BsChatLeftDots } from "react-icons/bs";
+import {MdOutlineDraw} from "react-icons/md"
+import {AiOutlineRead} from "react-icons/ai"
+import {GiBrain} from "react-icons/gi"
 
 import Locale from "../locales";
 
@@ -117,14 +123,14 @@ export function SideBar(props: { className?: string }) {
     const hours = currentDate.getHours(); // 获取小时
     const minutes = currentDate.getMinutes(); // 获取分钟
     const seconds = currentDate.getSeconds(); // 获取秒数
-    let hours_str ="",minutes_str="",seconds_str = "";
-    if(hours<10)hours_str = "0"+hours;
+    let hours_str = "", minutes_str = "", seconds_str = "";
+    if (hours < 10) hours_str = "0" + hours;
     else hours_str = hours.toString();
-    
-    if(minutes<10)minutes_str = "0"+minutes;
+
+    if (minutes < 10) minutes_str = "0" + minutes;
     else minutes_str = minutes.toString();
 
-    if(seconds<10)seconds_str = "0"+seconds;
+    if (seconds < 10) seconds_str = "0" + seconds;
     else seconds_str = seconds.toString();
 
     return hours_str + ":" + minutes_str + ":" + seconds_str;
@@ -235,6 +241,38 @@ export function SideBar(props: { className?: string }) {
       >
         <DragIcon />
       </div> */}
+
+
+
+      {window.innerWidth < 600 ?
+        <div className={styles["buttom-footer-mobile"]}>
+          <div className={styles["sidebar-action"]}>
+            <ButtonContainer>
+              <BsChatLeftDots className={styles["buttom-button-mobile"]+" "+styles["buttom-button-mobile-active"]} />
+            </ButtonContainer>
+          </div>
+          <div className={styles["sidebar-action"]}>
+            <ButtonContainer>
+              <MdOutlineDraw className={styles["buttom-button-mobile"]} />
+            </ButtonContainer>
+          </div>
+
+          <div className={styles["sidebar-action"]}>
+            <ButtonContainer addClassName="button-margin-top">
+              <div className={styles["user-button-mobile"]}>
+                <GoPerson className={styles["user-login-icon-mobile"]} />
+              </div>
+            </ButtonContainer>
+          </div>
+
+          <div className={styles["sidebar-action"]}>
+            <ButtonContainer><AiOutlineRead className={styles["buttom-button-mobile"]} /></ButtonContainer>
+          </div>
+          <div className={styles["sidebar-action"]}>
+            <ButtonContainer><GiBrain className={styles["buttom-button-mobile"]} /></ButtonContainer>
+          </div>
+
+        </div> : null}
     </div>
   );
 }

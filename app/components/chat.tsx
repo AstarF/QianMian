@@ -1307,9 +1307,9 @@ function _Chat() {
             onClick={scrollToBottom}
             rows={inputRows}
             autoFocus={autoFocus}
-            style={{
-              fontSize: config.fontSize,
-            }}
+            // style={{
+            //   fontSize: config.fontSize,
+            // }}
 
           />
           <IconButton

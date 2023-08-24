@@ -81,3 +81,27 @@
     margin-left: 5px;
   }
 }
+
+
+.button-container {
+  // background-color: var(--white);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  user-select: none;
+  outline: none;
+  border-style: none;
+  // color: var(--black);
+}
+
+.button-margin-top{
+  margin-top: -20px;
+  line-height: 65px;
+}
+
