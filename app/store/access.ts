@@ -6,14 +6,14 @@ import { BOT_HELLO } from "./chat";
 import { getClientConfig } from "../config/client";
 import { DefaultDeserializer } from "v8";
 
-function encr(message:string, key:string) {
-  let encrypted = '';
-  for (let i = 0; i < message.length; i++) {
-    const charCode = message.charCodeAt(i) ^ key;
-    encrypted += String.fromCharCode(charCode);
-  }
-  return encrypted;
-}
+// function encr(message:string, key:string) {
+//   let encrypted = '';
+//   for (let i = 0; i < message.length; i++) {
+//     const charCode = message.charCodeAt(i) ^ key;
+//     encrypted += String.fromCharCode(charCode);
+//   }
+//   return encrypted;
+// }
 
 
 function decr(a:string,b:string,key:number){
