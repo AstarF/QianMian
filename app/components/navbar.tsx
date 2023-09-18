@@ -60,10 +60,10 @@ export function NavBar(props: any) {
           onOk={handleLoginOk}
           onCancel={handleLoginCancel}
           footer={[
-            <Button type="primary" htmlType="submit" style={{ marginRight: '20px', width: "100px" }} key={"1"}>
+            <Button type="primary" htmlType="submit" style={{ marginRight: '20px', width: "100px" }} key="login">
               登陆
             </Button>,
-            <Button type="primary" onClick={handleLoginCancel} style={{ marginRight: '120px', width: "100px" }} key={"2"}>
+            <Button type="primary" onClick={handleLoginCancel} style={{ marginRight: '120px', width: "100px" }} key="back">
               返回
             </Button>,
           ]}
@@ -103,7 +103,7 @@ export function NavBar(props: any) {
           onOk={handleLoginOk}
           onCancel={handleLoginCancel}
           footer={[
-            <Button type="primary" htmlType="submit" style={{ marginRight: '10px', width: "90px" }}>
+            <Button type="primary" key="login" htmlType="submit" style={{ marginRight: '10px', width: "90px" }}>
               登陆
             </Button>,
             <Button type="primary" key="back" onClick={handleLoginCancel} style={{ marginRight: '60px', width: "90px" }}>
