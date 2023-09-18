@@ -24,7 +24,7 @@ export interface OpenAIListModelResponse {
 }
 
 export class ChatGPTApi implements LLMApi {
-  private disableListModels = true;
+  private disableListModels = true; 
 
   path(path: string): string {
     let openaiUrl = useAccessStore.getState().openaiUrl;

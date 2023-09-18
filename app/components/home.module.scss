@@ -130,22 +130,53 @@
   }
 }
 
-.user-button {
-  width: 30px;
+.top-header-button-panel{
+  position: absolute;
+  right: 20px;
+  top:10px;
+  float: left;
+  line-height: 30px;
+}
+
+.top-header-button {
+  width: 50px;
   height: 30px;
-  border-style: solid;
-  font-size: 25px;
+  //border-style: solid;
+  font-size: 15px;
   text-align: center;
-  border-radius: 25px;
+  // border-radius: 25px;
   padding: 0;
   // margin: 5px;
   // margin-top: 10px;
   cursor: pointer;
-  position: absolute;
-  right: 20px;
-  top:10px;
+
   color: var(--primary);
-  line-height: 30px;
+
+  display: inline-block;
+  margin-right: 10PX;
+}
+
+.top-header-button-r {
+  width: 80px;
+  height: 30px;
+  //border-style: solid;
+  font-size: 15px;
+  text-align: center;
+  // border-radius: 25px;
+  padding: 0;
+  // margin: 5px;
+  // margin-top: 10px;
+  cursor: pointer;
+  border-style: solid;
+  border-radius: 15px;
+  background-image: linear-gradient(to right bottom, var(--primary), var(--primary2));
+  // -webkit-background-clip: text;
+  color: transparent;
+  font-family: "Yuanti SC", Georgia, Serif;
+  color: #fff;
+
+  display: inline-block;
+  margin-right: 10PX;
 }
 
 .user-button-mobile{
@@ -172,9 +203,29 @@
 }
 
 .user-login-icon{
-  font-size: 20px;
+  font-size: 25px;
   color: var(--primary);
   cursor: pointer;
+  margin-top: 10px;
+}
+
+.nav-user-button{
+  width: 50px;
+  height: 50px;
+  box-shadow: var(--card-shadow-primary);
+  font-size: 25px;
+  text-align: center;
+  border-radius: 25px;
+  margin: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  line-height: 50px;
+  background-image: linear-gradient(to right bottom, var(--primary), var(--primary2));
+  -webkit-background-clip: text;
+  color: transparent;
+  font-family: "Yuanti SC", Georgia, Serif;
+  position: absolute;
+  bottom: 40px;
 }
 
 .user-login-icon-mobile{
@@ -182,6 +233,18 @@
   color: var(--primary);
   cursor: pointer;
 }
+
+//Login
+.login-input{
+  width: 720px;
+}
+
+.form-label{
+  float: right;
+  text-align: right;
+  border-style: solid;
+}
+
 
 @mixin container {
 
