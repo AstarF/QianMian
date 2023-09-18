@@ -54,47 +54,91 @@ export function NavBar(props: any) {
       </div>
 
 
-      <Modal title="登陆"
-        open={isLoginOpen}
-        onOk={handleLoginOk}
-        onCancel={handleLoginCancel}
-        footer={[
-          <Button type="primary" htmlType="submit" style={{marginRight:'20px',width:"120px"}}>
-            登陆
-          </Button>,
-          <Button type="primary" key="back" onClick={handleLoginCancel} style={{marginRight:'100px',width:"120px"}}>
-            返回
-          </Button>,
-        ]}
-      >
-        <img src="./images/login.png" width={'100%'} style={{marginBottom:'20px'}}></img>
-        <Form
-          name="basic"
-          labelCol={{ span: 6 }}
-          wrapperCol={{ span: 18 }}
-          style={{ maxWidth: 720}}
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
+      {window.innerWidth > 600 ?
+        <Modal title="登陆"
+          open={isLoginOpen}
+          onOk={handleLoginOk}
+          onCancel={handleLoginCancel}
+          footer={[
+            <Button type="primary" htmlType="submit" style={{ marginRight: '20px', width: "100px" }} key={"1"}>
+              登陆
+            </Button>,
+            <Button type="primary" onClick={handleLoginCancel} style={{ marginRight: '120px', width: "100px" }} key={"2"}>
+              返回
+            </Button>,
+          ]}
         >
-          <Form.Item<FieldType>
-            label="用户名"
-            name="username"
-            rules={[{ message: 'Please input your username!' }]}
+          <img src="./images/login.png" width={'100%'} style={{ marginBottom: '20px' }}></img>
+          <Form
+            name="basic"
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 18 }}
+            style={{ maxWidth: 720 }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
           >
-            <Input  style={{ maxWidth: 256}} />
-          </Form.Item>
+            <Form.Item<FieldType>
+              label="用户名"
+              name="username"
+              rules={[{ message: 'Please input your username!' }]}
+            >
+              <Input style={{ maxWidth: 256 }} />
+            </Form.Item>
 
-          <Form.Item<FieldType>
-            label="密码"
-            name="password"
-            rules={[{ message: 'Please input your password!' }]}
+            <Form.Item<FieldType>
+              label="密码"
+              name="password"
+              rules={[{ message: 'Please input your password!' }]}
+            >
+              <Input type="password" style={{ maxWidth: 256 }} />
+            </Form.Item>
+          </Form>
+        </Modal>
+        :
+
+        <Modal title="登陆"
+          open={isLoginOpen}
+          onOk={handleLoginOk}
+          onCancel={handleLoginCancel}
+          footer={[
+            <Button type="primary" htmlType="submit" style={{ marginRight: '10px', width: "90px" }}>
+              登陆
+            </Button>,
+            <Button type="primary" key="back" onClick={handleLoginCancel} style={{ marginRight: '60px', width: "90px" }}>
+              返回
+            </Button>,
+          ]}
+        >
+          <img src="./images/login.png" width={'100%'} style={{ marginBottom: '20px' }}></img>
+          <Form
+            name="basic"
+            labelCol={{ span: 1 }}
+            wrapperCol={{ span: 1 }}
+            style={{ maxWidth: 256 }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
           >
-            <Input type="password"  style={{ maxWidth: 256}} />
-          </Form.Item>
-        </Form>
-      </Modal>
+            <Form.Item<FieldType>
+              label="用户名"
+              name="username"
+              rules={[{ message: 'Please input your username!' }]}
+            >
+              <Input style={{ maxWidth: 256,marginLeft:'30px' }} />
+            </Form.Item>
+
+            <Form.Item<FieldType>
+              label="密码"
+              name="password"
+              rules={[{ message: 'Please input your password!' }]}
+            >
+              <Input type="password" style={{ maxWidth: 256,marginLeft:'30px' }} />
+            </Form.Item>
+          </Form>
+        </Modal>}
     </>
   );
 }
