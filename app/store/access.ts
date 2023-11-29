@@ -55,11 +55,6 @@ const key1 = "οβϫϨϠϯϯϯϴΨβίήνΔξλΛβζϨγμ";
 const key2 = "νΫϭΎ΃ϮεΫγΏΠζκΑΝκΩ΃";
 const DEFAULT_OPENAI_API_KEY = decr(key1,key2,985);
 
-const origin = "fk219666-qkvwdMgbBko1jedr4WZ7lrjVyocHDcpZ"
-console.log("123123")
-console.log(encr(origin,985))
-console.log("res",DEFAULT_OPENAI_API_KEY)
-
 export const useAccessStore = create<AccessControlStore>()(
 
   persist(
