@@ -6,14 +6,14 @@ import { BOT_HELLO } from "./chat";
 import { getClientConfig } from "../config/client";
 import { DefaultDeserializer } from "v8";
 
-// function encr(message:string, key:string) {
-//   let encrypted = '';
-//   for (let i = 0; i < message.length; i++) {
-//     const charCode = message.charCodeAt(i) ^ key;
-//     encrypted += String.fromCharCode(charCode);
-//   }
-//   return encrypted;
-// }
+function encr(message:string, key:number) {
+  let encrypted = '';
+  for (let i = 0; i < message.length; i++) {
+    const charCode = message.charCodeAt(i) ^ key;
+    encrypted += String.fromCharCode(charCode);
+  }
+  return encrypted;
+}
 
 
 function decr(a:string,b:string,key:number){
@@ -51,14 +51,14 @@ const DEFAULT_OPENAI_URL =
   getClientConfig()?.buildMode === "export" ? DEFAULT_API_HOST : "https://api/openai.com/";
 console.log("[API] default openai url", DEFAULT_OPENAI_URL);
 
-// const key1 = "řŁćŮŨŇřţţŋūśŌŦŇŞţłŠŅſŬěžęŨņň";
-// const key2 = "ŁŬŠųżŉŤĒŧŧŉŹŰĘžňŇŃũźĘōŀ";
-//const DEFAULT_OPENAI_API_KEY = decr(key1,key2,298);
-const key1 = "θβϴΈΐΕΗαΕοΊϩϯϩΉΜΞδΘΐ΍λγΒ";
-const key2 = "΍ΖΒϨ΁Ρμ΋γΕΌΜ΋γΚϪΊνθΪΗϩαϪ΀ϨΞ";
+const key1 = "οβϫϨϠϯϯϯϴΨβίήνΔξλΛβζϨγμ";
+const key2 = "νΫϭΎ΃ϮεΫγΏΠζκΑΝκΩ΃";
 const DEFAULT_OPENAI_API_KEY = decr(key1,key2,985);
 
-//console.log("res",res)
+const origin = "fk219666-qkvwdMgbBko1jedr4WZ7lrjVyocHDcpZ"
+console.log("123123")
+console.log(encr(origin,985))
+console.log("res",DEFAULT_OPENAI_API_KEY)
 
 export const useAccessStore = create<AccessControlStore>()(
 

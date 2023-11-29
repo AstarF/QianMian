@@ -146,6 +146,5 @@ export function getHeaders() {
       ACCESS_CODE_PREFIX + accessStore.accessCode,
     );
   }
-  console.log("&&&&&&&&&&&&&&&&&")
   return headers;
 }

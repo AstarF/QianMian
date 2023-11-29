@@ -12,8 +12,6 @@ const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack(config) {
