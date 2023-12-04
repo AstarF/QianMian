@@ -20,7 +20,7 @@
     "@hello-pangea/dnd": "^16.3.0",
     "@next/bundle-analyzer": "^13.4.16",
     "@next/font": "^13.4.19",
-    "@svgr/webpack": "^6.5.1",
+    "@svgr/webpack": "^8.1.0",
     "@vercel/analytics": "^0.1.11",
     "antd": "^5.9.1",
     "emoji-picker-react": "^4.4.7",
